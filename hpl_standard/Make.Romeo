@@ -1,0 +1,35 @@
+SHELL        = /bin/sh
+CD           = cd
+CP           = cp
+LN_S         = ln -s
+MKDIR        = mkdir
+RM           = /bin/rm -f
+TOUCH        = touch
+ARCH         = Romeo
+
+# --- Chemins ---
+TOPdir       = /gpfs/home/mehdisi/bench_hpl/hpl-2.3
+INCdir       = $(TOPdir)/include
+BINdir       = $(TOPdir)/bin/$(ARCH)
+LIBdir       = $(TOPdir)/lib/$(ARCH)
+HPLlib       = $(LIBdir)/libhpl.a 
+
+# --- Bibliothèques AMD ---
+LAdir        = /opt/softwares/amd/aocl/4.2.0/aocc
+LAinc        = -I$(LAdir)/include
+LAlib        = -L$(LAdir)/lib -lflame -lblis -lm
+
+# --- Compilation ---
+HPL_INCLUDES = -I$(INCdir) -I$(INCdir)/$(ARCH) $(LAinc)
+HPL_OPTS     = -O3 -march=native -funroll-loops -w
+CC           = mpicc
+CCNOOPT      = $(HPL_OPTS) $(HPL_INCLUDES)
+CCFLAGS      = $(HPL_OPTS) $(HPL_INCLUDES) -fomit-frame-pointer
+
+
+LINKER       = mpicc
+LINKFLAGS    = $(HPL_OPTS) $(HPLlib) $(LAlib)
+
+ARCHIVER     = ar
+ARFLAGS      = rcs
+RANLIB       = echo
