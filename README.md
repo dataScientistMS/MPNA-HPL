@@ -76,3 +76,6 @@ C'est sur ce paramètre que la différence architecturale est la plus marquante.
 
 * **Analyse :** Ce test valide l'intérêt de la distribution 2D. Les configurations extrêmes "plates" (1x128) ou "hautes" (16x8) sous-performent comparées aux configurations quasi-carrées (4x32 ou 8x16). Une grille carrée minimise le périmètre de la sous-matrice locale, et donc le volume de données à échanger avec les voisins.
 
+### 4. Désactivation de la Validation Numérique
+Pour les campagnes de mesures de performance (Séries S1 à S5), l'appel à la fonction de vérification `verify_LU` a été **commenté** dans le fichier `hpl_custom.c`. La fonction recompose A à partir de LU et compare A d'origine et la matrice recomposée.
+
